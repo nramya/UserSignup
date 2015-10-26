@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html ng-app="signupapp">
+  <head>
+    <meta charset="utf-8" />
+    <title>The SignUp</title>
+    <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.css"/>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body ng-controller="SignUpController as signup">
+    <div class="row">
+      <div class="col-lg-2 col-md-1 col-sm-1"></div>
+      <div class="col-lg-8 col-md-10 col-sm-10 jumbotron">
+        <div ng-if="signup.signupSuccess">
+          <div id="user-info">
+
+          </div>
+        </div>
+        <div ng-if="signup.signupSuccess == false">
+          <div ng-if="signup.error" class="alert alert-danger">{{signup.error}}</div>
+          <form novalidate name="signupForm" action="/" method="post">
+            <div class="col-lg-2"></div>
+            <div class="form-group col-lg-8">
+              <h3>Sign Up</h3>
+              <div class="input-group col-lg-12">
+                <label for="username">Username</label>
+                <input type="email" name="username" id="username" class="form-control" required aria-required="true" aria-describedby="username-error" maxlength="56" placeholder="Must be an email address" ng-model="signup.user.username"/>
+                <small id="username-error" class="error" ng-show="signupForm.username.$touched && (signupForm.username.$invalid || signupForm.username.$error.maxlength)">Required field. Must be a valid email id.</small>
+              </div>
+              <div class="input-group col-lg-12">
+                <label for="fname">First Name</label>
+                <input type="text" name="fname" class="form-control" required aria-required="true" aria-describedby="fname-error" ng-pattern="/^[a-zA-Z]*$/" ng-maxlength="50" ng-model="signup.user.firstName"/>
+                <small id="fname-error" class="error" ng-show="signupForm.firstName.$touched && (signupForm.firstName.$error.pattern || signupForm.firstName.$error.maxlength)">
+                  Required field. Letters only. Cannot have more than 50 characters.
+                </small>
+              </div>
+              <div class="input-group col-lg-12">
+                <label for="lname">Last Name</label><span>(Optional)</span>
+                <input type="text" name="lname" class="form-control" aria-describedby="lname-error" ng-pattern="/^[a-zA-Z]*$/" ng-maxlength="50" ng-model="signup.user.lastName"/>
+                <small id="lname-error" class="error"
+                       ng-show="signupForm.lastName.$touched && (signupForm.lastName.$error.pattern || signupForm.lastName.$error.maxlength)">Letters only. Cannot have more than 50 characters.</small>
+              </div>
+              <div class="input-group col-lg-12">
+                <label for="password">Password</label>
+                <input type="password" name="password" class="form-control" required aria-required="true" aria-describedby="password-error" minlength="6" ng-change="signup.checkPasswordMatch()" ng-model="signup.password1"/>
+                <small id="password-error" class="error" ng-show="signupForm.password.$touched && signupForm.password.$error.minlength">Required field. Must be at least 6 characters long.</small>
+                <br/>
+                <label for="confirm-password">Confirm Password</label>
+                <input type="password" name="confirm" class="form-control" required aria-required="true" aria-describedby="password-match-error" minlength="6" ng-change="signup.checkPasswordMatch()" ng-model="signup.password2"/>
+                <small id="password-match-error" class="error" ng-if="signupForm.confirm.$touched && signupForm.confirm.$dirty && (!signup.matched)">Required field. Passwords must match.</small>
+              </div>
+              <div class="input-group col-lg-12">
+                <!--<span>Min-date: {{signup.minDate}}</span>-->
+                <!--<span>Max-date: {{signup.maxDate}}</span>-->
+                <label for="birthday">Birthday</label>
+                <input type="date" class="form-control" ng-model="signup.user.birthday"
+                       min="signup.minDate" max="signup.maxDate"
+                       ng-required="true"  aria-required="true" aria-describedby="birthday-error"/>
+                <!--<input type="date" class="form-control" uib-datepicker-popup ng-model="signup.user.birthday" trigger="focus" is-open="signup.opened"-->
+                       <!--min-date="signup.minDate" max-date="signup.maxDate" min="signup.minDate" max="signup.maxDate" start-date="signup.maxDate"-->
+                       <!--ng-required="true" close-text="Close"  aria-required="true" aria-describedby="birthday-error"/>-->
+                <small id="birthday-error" class="error" ng-show="signupForm.confirm.$touched && (signupForm.birthday.$error.min || signupForm.birthday.$error.max)">Required filed. User must be between 14 and 150 years old.</small>
+              </div>
+              <div type="button" class="btn btn-primary" ng-click="signup.signUp()">Sign Up</div>
+              <div type="button" class="btn btn-default" ng-click="signup.clearFields()">Clear</div>
+            </div>
+            <div class="col-lg-2"></div>
+          </form>
+        </div>
+      </div>
+      <div class="col-lg-2 col-md-1 col-sm-1"></div>
+    </div>
+    <script src="/jquery/dist/jquery.js"></script>
+    <script src="/angular/angular.js"></script>
+    <script src="/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="/angular-animate/angular-animate.js"></script>
+    <!--<script src="/angular-strap/dist/angular-strap.js"></script>-->
+    <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.14.3.js"></script>
+    <!--<script src="/moment/moment.js"></script>-->
+    <script src="/javascripts/signup-controller.js"></script>
+    <script src="/javascripts/signup-service.js"></script>
+  </body>
+</html>

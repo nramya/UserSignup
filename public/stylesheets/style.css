@@ -1,0 +1,29 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+.form-control, .input-group-btn {
+  margin-bottom: 1em !important;
+}
+
+/*input:invalid,*/
+/*input:out-of-range {*/
+  /*border-color:hsl(0, 50%, 50%);*/
+  /*background:hsl(0, 50%, 90%);*/
+/*}*/
+
+input:focus + .help,
+input:invalid + .help {
+  display:inline-block;
+}
+
+.error {
+  display: block;
+  margin-bottom: 1.5em;
+  color: red;
+}
