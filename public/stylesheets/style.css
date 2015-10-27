@@ -27,3 +27,7 @@ input:invalid + .help {
   margin-bottom: 1.5em;
   color: red;
 }
+
+#repo-link {
+  float: right;
+}
